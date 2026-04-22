@@ -1,28 +1,87 @@
-# Magic Mobile Monorepo
+# Magic Mobile - Assignment Project
 
-This project is a Bun + Turborepo monorepo with:
+## Project Links
 
-- `apps/frontend`: Next.js UI (Clerk auth, project creation/listing)
-- `apps/primaryBackend`: Express API on `9090` (project CRUD + JWT auth)
-- `apps/worker`: Express API on `9091` (Gemini prompt processing)
-- `packages/db`: Prisma schema/client for PostgreSQL
+- **Frontend Link:** [http://localhost:3000](http://localhost:3000)
+- **Backend Link:** [http://localhost:9090](http://localhost:9090)
+- **Worker API Link:** [http://localhost:9091](http://localhost:9091)
+- **Working Drive Link:** [Add your Google Drive demo link here](https://drive.google.com/)
 
-## Architecture Overview
+> Replace the frontend, backend, and Drive links above with deployed links before final submission if you have hosted versions.
 
-1. User signs in from the frontend (Clerk).
-2. Frontend sends authenticated requests to primary backend:
-   - `POST /project` creates a project
-   - `GET /projects` lists user projects
-3. Worker handles `POST /prompt`, streams model output, and stores prompt/action history.
-4. Both backend and worker read/write PostgreSQL via Prisma (`packages/db`).
+## About The Project
 
----
+Magic Mobile is an AI-powered web application builder assignment project. It allows users to describe the app or website they want to build, then creates and stores projects based on those prompts. The platform includes user authentication, project creation, project listing, prompt processing, and database storage.
 
-## Run With Docker (All Services + PostgreSQL)
+The project is built as a full-stack Bun + Turborepo monorepo. It includes a Next.js frontend, an Express primary backend, an Express worker service, Prisma ORM, and PostgreSQL.
 
-### 1) Prepare Docker env file
+## Platform Screenshot
 
-From repo root:
+![Magic Mobile Platform Screenshot](./assets/platform-screenshot.svg)
+
+## What Is This Project?
+
+Magic Mobile is a prompt-based application generation platform. The idea is similar to an AI app builder: a user enters a prompt such as "create a portfolio website" or "build a dashboard", and the system creates a project entry for that request.
+
+This assignment demonstrates a complete full-stack architecture with authentication, API communication, database persistence, and a separate worker service for AI-related processing.
+
+## What It Does
+
+- Provides a modern Next.js frontend where users can enter prompts.
+- Uses Clerk authentication so each user has their own project data.
+- Sends authenticated requests from the frontend to the backend.
+- Creates new projects from user prompts.
+- Lists previously created projects for the signed-in user.
+- Stores users, projects, prompts, and actions in PostgreSQL using Prisma.
+- Uses a worker service to process AI prompts with the Gemini API.
+- Supports local development and Docker-based setup.
+
+## Tech Stack
+
+- **Frontend:** Next.js 15, React 19, TypeScript, Tailwind CSS, Clerk authentication
+- **Primary Backend:** Express.js, Bun, JWT authentication
+- **Worker Service:** Express.js, Bun, Gemini API prompt processing
+- **Database:** PostgreSQL with Prisma ORM
+- **Monorepo Tools:** Turborepo, Bun workspaces
+- **Deployment Support:** Docker and Docker Compose
+
+## Installation Guide
+
+Follow these steps to install and set up the project on a new system.
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repository-url>
+cd magic-mobile
+```
+
+### 2. Install prerequisites
+
+Make sure these are installed:
+
+- Node.js `18` or above
+- Bun `1.2.x`
+- PostgreSQL
+- Docker Desktop, optional but recommended for easy setup
+
+Check installed versions:
+
+```bash
+node --version
+bun --version
+docker --version
+```
+
+### 3. Install project dependencies
+
+```bash
+bun install
+```
+
+### 4. Set up environment variables
+
+For Docker setup, create the Docker environment file:
 
 ```bash
 cp .env.docker.example .env.docker
@@ -34,18 +93,151 @@ On Windows PowerShell:
 copy .env.docker.example .env.docker
 ```
 
-Then edit `.env.docker` and set real values for:
+Then add the required values in `.env.docker`:
 
-- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
-- `CLERK_SECRET_KEY`
-- `JWT_PUBLIC_KEY`
-- `GOOGLE_API_KEY`
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+JWT_PUBLIC_KEY=
+GOOGLE_API_KEY=
+DATABASE_URL=postgresql://postgres:mypassword@postgres:5432/postgres
+```
 
-`DATABASE_URL` is preconfigured for Docker network:
+For local setup without Docker, create these environment files:
 
-`postgresql://postgres:mypassword@postgres:5432/postgres`
+- `packages/db/.env`
+- `apps/primaryBackend/.env`
+- `apps/worker/.env`
+- `apps/frontend/.env`
 
-### 2) Start everything
+Use this local database URL:
+
+```env
+DATABASE_URL=postgresql://postgres:mypassword@localhost:5432/postgres
+```
+
+### 5. Set up the database
+
+If using Docker, the database starts automatically with Docker Compose.
+
+If running locally, start PostgreSQL first, then run:
+
+```bash
+bunx prisma migrate deploy --schema packages/db/prisma/schema.prisma
+bunx prisma generate --schema packages/db/prisma/schema.prisma
+```
+
+### 6. Start the project
+
+Recommended Docker command:
+
+```bash
+docker compose up --build
+```
+
+Or run locally in separate terminals:
+
+```bash
+bun --cwd apps/frontend dev
+bun --cwd apps/primaryBackend run index.ts
+bun --cwd apps/worker run index.ts
+```
+
+### 7. Open the application
+
+```text
+Frontend: http://localhost:3000
+Backend:  http://localhost:9090
+Worker:   http://localhost:9091
+```
+
+## Project Structure
+
+```text
+magic-mobile/
+  apps/
+    frontend/        # Main Next.js user interface
+    primaryBackend/  # Express API for projects and authentication
+    worker/          # Prompt processing service
+    docs/            # Starter docs app
+    web/             # Starter web app
+  packages/
+    db/              # Prisma schema and database client
+    ui/              # Shared UI package
+    redis/           # Shared Redis package
+```
+
+## Features
+
+- User authentication using Clerk
+- Create projects from AI prompts
+- List user-specific projects
+- Store project and prompt history in PostgreSQL
+- Backend authentication middleware using JWT
+- Worker service for AI prompt processing
+- Docker setup for running the complete stack
+
+## Architecture Overview
+
+1. The user signs in from the frontend using Clerk.
+2. The frontend sends authenticated requests to the primary backend.
+3. The primary backend handles project creation and project listing.
+4. The worker service handles prompt processing and stores prompt/action history.
+5. Backend services use Prisma to read and write data in PostgreSQL.
+
+## API Endpoints
+
+### Primary Backend
+
+- `POST /project` - Create a new project
+- `GET /projects` - Get all projects for the signed-in user
+
+Base URL:
+
+```text
+http://localhost:9090
+```
+
+### Worker Service
+
+- `POST /prompt` - Process a prompt with the AI worker
+
+Base URL:
+
+```text
+http://localhost:9091
+```
+
+## Run With Docker
+
+### 1. Create Docker environment file
+
+```bash
+cp .env.docker.example .env.docker
+```
+
+On Windows PowerShell:
+
+```powershell
+copy .env.docker.example .env.docker
+```
+
+Update `.env.docker` with real values:
+
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+JWT_PUBLIC_KEY=
+GOOGLE_API_KEY=
+```
+
+The Docker database URL is already configured as:
+
+```env
+DATABASE_URL=postgresql://postgres:mypassword@postgres:5432/postgres
+```
+
+### 2. Start all services
 
 ```bash
 docker compose up --build
@@ -53,62 +245,66 @@ docker compose up --build
 
 This starts:
 
-- `postgres` on `5432`
-- `primary-backend` on `9090`
-- `worker` on `9091`
-- `frontend` on `3000`
+- Frontend: `http://localhost:3000`
+- Primary backend: `http://localhost:9090`
+- Worker service: `http://localhost:9091`
+- PostgreSQL: `localhost:5432`
 
-Open: [http://localhost:3000](http://localhost:3000)
-
-### 3) Stop everything
+### 3. Stop all services
 
 ```bash
 docker compose down
 ```
 
-To also remove DB volume:
+To remove the database volume also:
 
 ```bash
 docker compose down -v
 ```
 
----
+## Run Locally Without Docker
 
-## Run Locally (Without Docker)
-
-### 1) Prerequisites
+### 1. Prerequisites
 
 - Bun `1.2.x`
-- Node `>=18`
+- Node.js `>=18`
 - PostgreSQL running locally
 
-### 2) Install dependencies
+### 2. Install dependencies
 
 ```bash
 bun install
 ```
 
-### 3) Configure per-app env files
+### 3. Configure environment files
 
-- `packages/db/.env`:
-  - `DATABASE_URL=postgresql://postgres:mypassword@localhost:5432/postgres`
-- `apps/primaryBackend/.env`:
-  - `DATABASE_URL=...`
-  - `JWT_PUBLIC_KEY=...`
-- `apps/worker/.env`:
-  - `DATABASE_URL=...`
-  - `GOOGLE_API_KEY=...`
-- `apps/frontend/.env`:
-  - Clerk keys
+Create and update these files:
 
-### 4) Run Prisma migrations + generate client
+- `packages/db/.env`
+- `apps/primaryBackend/.env`
+- `apps/worker/.env`
+- `apps/frontend/.env`
+
+Required values include:
+
+```env
+DATABASE_URL=postgresql://postgres:mypassword@localhost:5432/postgres
+JWT_PUBLIC_KEY=
+GOOGLE_API_KEY=
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+```
+
+### 4. Run Prisma migrations and generate client
 
 ```bash
 bunx prisma migrate deploy --schema packages/db/prisma/schema.prisma
 bunx prisma generate --schema packages/db/prisma/schema.prisma
 ```
 
-### 5) Start services (3 terminals)
+### 5. Start services
+
+Run these commands in separate terminals:
 
 Frontend:
 
@@ -128,20 +324,20 @@ Worker:
 bun --cwd apps/worker run index.ts
 ```
 
----
+## Root Scripts
 
-## Useful Endpoints
+```bash
+bun run dev
+bun run build
+bun run lint
+bun run check-types
+bun run format
+```
 
-- Primary backend:
-  - `POST http://localhost:9090/project`
-  - `GET http://localhost:9090/projects`
-- Worker:
-  - `POST http://localhost:9091/prompt`
+## Notes For Evaluation
 
----
-
-## Notes
-
-- `apps/frontend/config.ts` uses `http://localhost:9090` for backend calls.
-- `JWT_PUBLIC_KEY` supports escaped `\n` format in env files.
-- Docker setup runs Prisma migration before APIs start.
+- The frontend currently calls the backend from `apps/frontend/config.ts`.
+- The primary backend runs on port `9090`.
+- The worker service runs on port `9091`.
+- The frontend runs on port `3000`.
+- Docker Compose runs database migration before starting backend services.

@@ -1,0 +1,55 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Magic Mobile platform screenshot</title>
+  <desc id="desc">Preview of the Magic Mobile AI app builder home screen with navigation, hero text, prompt box, and template actions.</desc>
+  <rect width="1440" height="900" fill="#080B10"/>
+  <rect width="1440" height="900" fill="url(#background)"/>
+  <rect x="0" y="0" width="1440" height="76" fill="#070A0F" opacity="0.92"/>
+  <line x1="0" y1="76" x2="1440" y2="76" stroke="#172033"/>
+
+  <text x="64" y="48" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Magic Mobile</text>
+  <text x="1120" y="47" fill="#CAD5E5" font-family="Arial, Helvetica, sans-serif" font-size="16">Projects</text>
+  <text x="1210" y="47" fill="#CAD5E5" font-family="Arial, Helvetica, sans-serif" font-size="16">GitHub</text>
+  <rect x="1296" y="24" width="80" height="34" rx="17" fill="#2563EB"/>
+  <text x="1320" y="47" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">Sign in</text>
+
+  <rect x="38" y="126" width="46" height="648" rx="23" fill="#0D1420" stroke="#1F2C43"/>
+  <circle cx="61" cy="166" r="7" fill="#60A5FA"/>
+  <circle cx="61" cy="216" r="7" fill="#64748B"/>
+  <circle cx="61" cy="266" r="7" fill="#64748B"/>
+
+  <rect x="595" y="196" width="250" height="42" rx="21" fill="#111A2A" stroke="#1D3C75"/>
+  <text x="622" y="224" fill="#60A5FA" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">Introducing Hyper Mind</text>
+
+  <text x="342" y="345" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="800">What will you</text>
+  <text x="823" y="345" fill="#60A5FA" font-family="Arial, Helvetica, sans-serif" font-size="74" font-style="italic" font-weight="800">build</text>
+  <text x="1022" y="345" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="800">today?</text>
+  <text x="483" y="406" fill="#A8B3C7" font-family="Arial, Helvetica, sans-serif" font-size="25">Create stunning apps and websites by chatting with AI.</text>
+
+  <rect x="330" y="472" width="780" height="150" rx="24" fill="#0F1724" stroke="#263855" stroke-width="2"/>
+  <text x="368" y="526" fill="#7F8EA7" font-family="Arial, Helvetica, sans-serif" font-size="22">Ask Magic Mobile to build a dashboard, landing page, app, or website...</text>
+  <line x1="368" y1="558" x2="1070" y2="558" stroke="#223047"/>
+  <rect x="368" y="582" width="122" height="34" rx="17" fill="#15233A" stroke="#2B4263"/>
+  <text x="391" y="605" fill="#C9D7EA" font-family="Arial, Helvetica, sans-serif" font-size="14">Upload</text>
+  <rect x="508" y="582" width="122" height="34" rx="17" fill="#15233A" stroke="#2B4263"/>
+  <text x="536" y="605" fill="#C9D7EA" font-family="Arial, Helvetica, sans-serif" font-size="14">Import</text>
+  <rect x="936" y="572" width="134" height="48" rx="24" fill="#2563EB"/>
+  <text x="972" y="603" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">Create</text>
+
+  <rect x="377" y="665" width="210" height="54" rx="12" fill="#111A2A" stroke="#20324D"/>
+  <text x="415" y="700" fill="#D8E2F0" font-family="Arial, Helvetica, sans-serif" font-size="16">Build a SaaS app</text>
+  <rect x="615" y="665" width="210" height="54" rx="12" fill="#111A2A" stroke="#20324D"/>
+  <text x="653" y="700" fill="#D8E2F0" font-family="Arial, Helvetica, sans-serif" font-size="16">Create portfolio</text>
+  <rect x="853" y="665" width="210" height="54" rx="12" fill="#111A2A" stroke="#20324D"/>
+  <text x="891" y="700" fill="#D8E2F0" font-family="Arial, Helvetica, sans-serif" font-size="16">Generate website</text>
+
+  <path d="M116 824C244 724 382 707 545 746C730 790 854 828 1062 760C1186 719 1307 735 1425 804V900H116V824Z" fill="#03060A" opacity="0.78"/>
+  <path d="M112 827C286 725 438 711 610 755C787 800 912 804 1068 758C1216 714 1330 741 1440 804" stroke="#60A5FA" stroke-opacity="0.34" stroke-width="5"/>
+
+  <defs>
+    <radialGradient id="background" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(720 480) rotate(90) scale(720 940)">
+      <stop stop-color="#102240"/>
+      <stop offset="0.42" stop-color="#0B1220"/>
+      <stop offset="1" stop-color="#080B10"/>
+    </radialGradient>
+  </defs>
+</svg>
