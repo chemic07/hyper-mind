@@ -17,7 +17,9 @@ export function authMiddleware(
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_PUBLIC_KEY!, {
+    // Allow Docker/.env style escaped newlines in the PEM key.
+    const publicKey = (process.env.JWT_PUBLIC_KEY || "").replace(/\\n/g, "\n");
+    const decoded = jwt.verify(token, publicKey, {
       algorithms: ["RS256"],
     });
 
